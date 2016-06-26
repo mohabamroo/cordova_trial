@@ -3,7 +3,8 @@
 <head>
 <title>Facebook Login JavaScript Example</title>
 <meta charset="UTF-8">
-
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.2.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
 </head>
 <body>
 <script>
@@ -99,6 +100,11 @@
 </fb:login-button>
 <div id="status">
 </div>
-
+<button id="othr">other facebook</button>
+<script type="text/javascript">
+  $('#othr').click(function() {
+    window.location = "facebook-popup.html"
+  });
+</script>
 </body>
 </html>
