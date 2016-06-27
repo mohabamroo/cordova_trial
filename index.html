@@ -83,7 +83,8 @@
             var getbirthday = function() { 
                 facebookConnectPlugin.api("me/?fields=gender,about,birthday,email,id,locale,bio,cover,age_range,link,location,last_name,middle_name,name", ["user_birthday"],
                 function (result) {
-                    alert("Result: " + JSON.stringify(result));
+                    alert("Result: " + JSON.stringify(result);
+                alert(response.name));
                     /* alerts:
                         {
                             "id": "000000123456789",
@@ -104,8 +105,7 @@
                     caption: 'Testing using phonegap plugin',
                     description: 'Posting photo using phonegap facebook plugin'
                 }, 
-                function (response) { alert(JSON.stringify(response));
-                alert(response.name) },
+                function (response) { alert(JSON.stringify(response)) },
                 function (response) { alert(JSON.stringify(response)) });
             }
             var logout = function () { 
