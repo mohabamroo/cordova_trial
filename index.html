@@ -84,7 +84,7 @@
                 facebookConnectPlugin.api("me/?fields=gender,about,birthday,email,id,locale,bio,cover,age_range,link,location,last_name,middle_name,name", ["user_birthday"],
                 function (result) {
                     alert("Result: " + JSON.stringify(result));
-                    alert(response.name);
+                    alert(result.name);
                     /* alerts:
                         {
                             "id": "000000123456789",
