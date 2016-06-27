@@ -1,22 +1,4 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
     <head>
         <meta charset="utf-8" />
@@ -39,72 +21,84 @@
             <div class="event listening button" onclick="getAccessToken();">Get access token with Facebook</div>
             <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
             <div class="event listening button" onclick="logout();">Logout with Facebook</div>
+            <div class="event listening button" onclick="getbirthday();">get birthday</div>
+
         </div>
         <div id="fb-root"></div>
         <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript">
-          // Load the SDK asynchronously
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "https://connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-
-
+            // Load the SDK asynchronously
+            (function(d, s, id) {
+                var js, fjs = d.getElementsByTagName(s)[0];
+                if (d.getElementById(id)) return;
+                js = d.createElement(s); js.id = id;
+                js.src = "https://connect.facebook.net/en_US/sdk.js";
+                fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));
             var login = function () {
-                  FB.init({
-    appId      : '1594582047520422',
-    cookie     : true,  // enable cookies to allow the server to access 
-                        // the session
-    xfbml      : true,  // parse social plugins on this page
-    version    : 'v2.6' // use graph api version 2.5
+                FB.init({
+                appId : '1594582047520422',
+                cookie : true,  // enable cookies to allow the server to access 
+                                // the session
+                xfbml : true,  // parse social plugins on this page
+                version : 'v2.6' // use graph api version 2.5
+                });
 
-  });
                 if (window.cordova.platformId == "browser") {
                     var appId = prompt("Enter FB Application ID", "");
                     facebookConnectPlugin.browserInit(appId);
                 }
+
                 if (window.cordova.platformId == "browser") {
                     facebookConnectPlugin.browserInit(appId, 'v2.6');
                     // version is optional. It refers to the version of API you may want to use.
                 }
                 facebookConnectPlugin.login( ["email"], 
                     function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
+                    function (response) { alert(JSON.stringify(response))
+                });
+            }  
             var showDialog = function () { 
-                facebookConnectPlugin.showDialog( { method: "feed" }, 
+                facebookConnectPlugin.showDialog({ method: "feed" }, 
                     function (response) { alert(JSON.stringify(response)) },
-                    function (response) { alert(JSON.stringify(response)) });
-            }
-            
+                    function (response) { alert(JSON.stringify(response))
+                });
+            }             
             var apiTest = function () { 
                 facebookConnectPlugin.api( "me/?fields=id,email", ["user_birthday"],
                     function (response) { alert(JSON.stringify(response)) },
                     function (response) { alert(JSON.stringify(response)) }); 
             }
-
             var getAccessToken = function () { 
                 facebookConnectPlugin.getAccessToken( 
                     function (response) { alert(JSON.stringify(response)) },
                     function (response) { alert(JSON.stringify(response)) });
             }
-            
             var getStatus = function () { 
                 facebookConnectPlugin.getLoginStatus( 
                     function (response) { alert(JSON.stringify(response)) },
                     function (response) { alert(JSON.stringify(response)) });
             }
-
+            var getbirthday = function() { 
+                facebookConnectPlugin.api("<user-id>/?fields=id,email", ["user_birthday"],
+                function (result) {
+                    alert("Result: " + JSON.stringify(result));
+                    /* alerts:
+                        {
+                            "id": "000000123456789",
+                            "email": "myemail@example.com"
+                        }
+                    */
+                },
+                function (error) {
+                    alert("Failed: " + error);
+                });
+            }
             var logout = function () { 
                 facebookConnectPlugin.logout( 
                     function (response) { alert(JSON.stringify(response)) },
                     function (response) { alert(JSON.stringify(response)) });
             }
-
         </script>
     </body>
 </html>
