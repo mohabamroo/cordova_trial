@@ -81,7 +81,7 @@
                     function (response) { alert(JSON.stringify(response)) });
             }
             var getbirthday = function() { 
-                facebookConnectPlugin.api("me/?fields=id,email,birthday", ["user_birthday"],
+                facebookConnectPlugin.api("me/?fields=gender,about,birthday,email,id,locale,bio,cover,age_range,link,location,last_name,middle_name,name", ["user_birthday"],
                 function (result) {
                     alert("Result: " + JSON.stringify(result));
                     /* alerts:
