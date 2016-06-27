@@ -22,6 +22,7 @@
             <div class="event listening button" onclick="getStatus();">Get login status with Facebook</div>
             <div class="event listening button" onclick="logout();">Logout with Facebook</div>
             <div class="event listening button" onclick="getbirthday();">get birthday</div>
+            <div class="event listening button" onclick="publishPhoto();">publish photo</div>
 
         </div>
         <div id="fb-root"></div>
@@ -93,6 +94,18 @@
                 function (error) {
                     alert("Failed: " + JSON.stringify(error));
                 });
+            }
+            var publishPhoto = function() {
+                facebookConnectPlugin.showDialog({
+                    method: "feed",
+                    picture:'https://www.google.co.jp/logos/doodles/2014/doodle-4-google-2014-japan-winner-5109465267306496.2-hp.png',
+                    name:'Test Post',
+                    message:'First photo post',    
+                    caption: 'Testing using phonegap plugin',
+                    description: 'Posting photo using phonegap facebook plugin'
+                }, 
+                function (response) { alert(JSON.stringify(response)) },
+                function (response) { alert(JSON.stringify(response)) });
             }
             var logout = function () { 
                 facebookConnectPlugin.logout( 
